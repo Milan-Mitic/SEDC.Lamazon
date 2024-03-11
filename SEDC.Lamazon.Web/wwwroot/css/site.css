@@ -1,0 +1,47 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+
+
+
+.rating {
+    display: inline-block;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    font-size: 30px;
+    color: #ddd;
+    cursor: pointer;
+}
+
+.rating label:before {
+    content: "\2605"; 
+    display: block;
+    margin: 5px;
+    font-size: 30px;
+}
+
+.rating input:checked ~ label {
+    color: #f90; 
+}

@@ -1,0 +1,80 @@
+﻿﻿@using SEDC.Lamazon.Services.ViewModels.Product
+
+@model ProductViewModel
+
+<div class="card shadow mt-4 mb-4">
+    <div class="card-header bg-primary text-light py-4">
+        <div class="col-12 text-center">
+            <h3 class="text-white text-uppercase"> @Model.Name</h3>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <a asp-action="Index" class="btn btn-outline-primary text-uppercase">Back to home</a>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="col-12 text-center">
+                <img src="@Model.ImageUrl" class="d-block w-50" />
+            </div>
+            <div class="col-12">
+                <span class="badge bg-primary">@Model.ProductCategoryName</span>
+            </div>
+            <div class="col-12 text-dark">
+                <p>@Model.Description</p>
+            </div>
+            <div class="row">
+                <h6 class="text-dark text-opacity-50 pb-2">
+                    List Price: <span>@Model.Price.ToString("c")</span>
+                </h6>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <a class="btn btn-primary" asp-action="AddToCart" asp-route-productId="@Model.Id">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+
+            
+        <div class="row mt-3">
+            <div class="col-12">
+                <label for="rating">Rate our product</label>
+
+                <form action="@Url.Action("AddReview", "Review")" method="post">
+                    <input type="hidden" name="productId" value="@Model.Id" />
+
+                    <div class="form-group">
+                        <div class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" />
+                            <label for="star5"></label>
+                            <input type="radio" id="star4" name="rating" value="4" />
+                            <label for="star4"></label>
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label for="star3"></label>
+                            <input type="radio" id="star2" name="rating" value="2" />
+                            <label for="star2"></label>
+                            <input type="radio" id="star1" name="rating" value="1" />
+                            <label for="star1"></label>
+                       
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comment">Comment</label>
+                        <textarea name="comment" class="form-control"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+        
+
+
+
+

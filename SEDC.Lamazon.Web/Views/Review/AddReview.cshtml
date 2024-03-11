@@ -1,0 +1,12 @@
+﻿﻿@using SEDC.Lamazon.Services.ViewModels.Review;
+@model ReviewViewModel
+
+
+<h2>Add Review</h2>
+<div>
+    <p><strong>Rating:</strong> @Model.Rating</p>
+    <p><strong>Comment:</strong> @Model.Comment</p>
+    <p><strong>Time:</strong> <strong>@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") </strong></p>
+    <p style="color:green">Review successfully submitted and stored in the database</p>
+    <hr />
+</div>

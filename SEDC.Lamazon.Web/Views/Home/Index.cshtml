@@ -1,0 +1,90 @@
+﻿@using SEDC.Lamazon.Domain.Entities
+﻿@using SEDC.Lamazon.Services.ViewModels.Product;
+
+@model List<ProductViewModel>
+
+@{
+    Pager pager = new Pager();
+
+    int pageNo = 0;
+
+    if(ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+}
+
+<div class="row">
+
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3">
+            <div class="col-12">
+                <div class="card p-3 shadow rounded">
+                    <img src="@product.ImageUrl" class="card-img-top rounded" />
+
+                    <div class="card-body pb-0">
+
+                        <div>
+                            <p class="card-title h5 text-dark text-uppercase text-center">@product.Name</p>
+                        </div>
+
+                        <div>
+                            <p class="text-dark text-center text-opacity-75">@product.Price $</p>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a asp-action="ProductDetails" asp-route-id="@product.Id" class="btn btn-primary form-control">Details</a>
+                        <a asp-action="AddToCart" asp-route-productId="@product.Id" class="btn btn-outline-primary py-2"><strong>+</strong></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>﻿
+
+
+
+<div class="container">
+    @if(pager.TotalPages > 0)
+    {
+        <ul class="pagination justify-content-end">
+
+            @if (pager.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pg="1">First</a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pg="@(pager.CurrentPage - 1)">Previous</a>
+                </li>
+            }
+            
+            @for(var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+            {
+                <li class="page-item @(pge == pager.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pg="@pge"> @pge</a>
+                </li>
+            }
+
+            @if (pager.CurrentPage < pager.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pg="@(pager.CurrentPage + 1)">Next</a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pg="@(pager.TotalPages)">Last</a>
+                </li>
+            }
+
+        </ul>
+    }
+</div>
+
+
+
